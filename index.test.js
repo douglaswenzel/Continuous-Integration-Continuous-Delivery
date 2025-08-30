@@ -19,11 +19,11 @@ describe('GET /api/test', () => {
 });
 
 
-describe('GET /api/abacaxi', () => {
-  it('aqui deverá vir um abacaxi', async () => {
-    const res = await request(app).get('/api/abacaxi');
+describe('GET /api/goiaba', () => {
+  it('aqui deverá vir uma goiaba', async () => {
+    const res = await request(app).get('/api/goiaba');
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toHaveProperty('message', 'Endpoint de abacaxi');
+    expect(res.body).toHaveProperty('message', 'Endpoint de goiaba');
   });
 });
 
