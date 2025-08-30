@@ -18,14 +18,14 @@ describe('GET /api/test', () => {
   });
 });
 
-/*
-describe('GET /api/test', () => {
-  it('should return a test message', async () => {
-    const res = await request(app).get('/api/test-2');
+
+describe('GET /api/goiaba', () => {
+  it('aqui deverá vir uma goiaba', async () => {
+    const res = await request(app).get('/api/goiaba');
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toHaveProperty('message', 'Endpoint de teste 2');
+    expect(res.body).toHaveProperty('message', 'Endpoint de goiaba');
   });
 });
-*/
+
 
 jest.setTimeout(30000); 
