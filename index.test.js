@@ -3,15 +3,15 @@ const request = require('supertest');
 const app = require('../src/index');
 
 describe('GET /api', () => {
-  it('should return Hello world!', async () => {
+  it('deveria retornar um Olá Mundo!', async () => {
     const res = await request(app).get('/api');
     expect(res.statusCode).toEqual(200);
-    expect(res.text).toBe('Hello world!');
+    expect(res.text).toBe('Olá Mundo!');
   });
 });
 
 describe('GET /api/test', () => {
-  it('should return a test message', async () => {
+  it('deveria retornar uma mensagem de teste', async () => {
     const res = await request(app).get('/api/test');
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('message', 'Endpoint de teste');
