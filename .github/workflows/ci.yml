@@ -58,12 +58,10 @@ jobs:
           echo "Commits desde a última tag:"
           echo "$COMMITS"
           
-          # Inicializando variáveis
           MAJOR=0
           MINOR=0
           PATCH=0
           
-          # Analisando mensagens de commit
           for COMMIT in "$COMMITS"; do
             if [[ "$COMMIT" == *"BREAKING CHANGE"* ]]; then
               MAJOR=1
@@ -74,7 +72,6 @@ jobs:
             fi
           done
           
-          # Calculando a nova versão usando semver
           CURRENT_VERSION=${LAST_TAG#v}
           NEW_VERSION=$CURRENT_VERSION
           if [[ $MAJOR -eq 1 ]]; then
@@ -90,7 +87,7 @@ jobs:
 
       - name: Atualizar versão no package.json
         run: |
-          npm version ${{ env.new_version }} --no-git-tag-version --allow-same-version
+          npm version ${{ env.new_version }} --no-git-tag-version
           
       - name: Commit e push
         env:
@@ -98,7 +95,12 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          git add package.json
-          git commit -m "chore(release): version ${{ env.new_version }}"
-          git tag v${{ env.new_version }}
-          git push origin main --tags
+          
+          if git diff --quiet package.json; then
+            echo "Nenhuma mudança no package.json para commitar"
+          else
+            git add package.json
+            git commit -m "chore(release): version ${{ env.new_version }}"
+            git tag v${{ env.new_version }}
+            git push origin main --tags
+          fi
