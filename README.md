@@ -1,0 +1,1 @@
+Este é um arquivo de read-me vanilla para teste
